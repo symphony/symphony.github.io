@@ -1,17 +1,4 @@
-/// test script for tinkering
-
-// jquery testing
-$(document).ready(function() {
-  $(".hidden").hover(function() {
-   $(this).css("color", "blue");
-  },
-  function() {
-    $(this).hide();
-  });
-
-});
-
-
+/// test js file for tinkering
 const generateBarChart = function(data) {
   return data;
 }
