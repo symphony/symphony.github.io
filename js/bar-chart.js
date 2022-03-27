@@ -1,17 +1,76 @@
 /// test js file for tinkering
+
+// todo include jquery, set up page
+
+// Global default variable values
+const defaultColors = ["#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
+const defaultLabel = "Value";
+const defaultDark = "#222";
+const defaultLight = "#eee";
+
+
+// Default Objects
+const defaultData = [0, 2, 4, 6];
+const defaultOptions = {
+  barColor: defaultColors[0],
+  valuePos: "center",
+  valueColor: "light",
+  labelColor: "black",
+  title: "My Chart",
+  titleColor: "#000",
+  titleSize: 14, // in pixels,
+  stackedColor: defaultColors,
+  spacing: 2, // px
+  ticks: 10,
+  label: defaultLabel + 1, // todo create dynamic label generator
+  background: "dark"
+}
+const defaultElement = 1;
+
+
+// Main Bar Chart Function
 const generateBarChart = function(data, options, element) {
-  return data, options, element;
+  // initialize values
+  const chartData = defaultData; // array
+  const chartOptions = defaultOptions // object
+  const chartElement = element || defaultElement; // number
+
+  // todo auto bar width
+
+  // todo auto bar height
+
+  // todo auto whole chart width
+
+  // todo auto chart height based on largest tick
+
+
+  // test return
+  return [chartData, chartOptions, chartElement];
 }
 
-const testData = [1, 22, 7, 17];
-const testOptions = {barColor: "blue"}
-const testElement = "chart1";
+// todo color type (string/hex) converter function
+// todo size type converter
 
-console.log(generateBarChart(testData, testOptions, testElement);
+// Test Data
+const testData = [1, 22, [7, 4, 2], 17];
+const testOptions = {
+  // barColor: "blue",
+  valuePos: "top",
+  labelColor: "orange",
+  // title: "My Chart",
+  titleColor: 0, // default
+  // titleSize: 0,
+  stackedColor: ["red", "#FF3"],
+  spacing: 4,
+  ticks: 6
+}
+const testElement = 0;
+
+console.log(generateBarChart(testData, testOptions, testElement));
 
 
-/* Description
-Create an API to draw a bar chart. Set parameters on HTML page and render chart in demo page. Demo page to display chart at Start.
+/* Project Description
+Create an API to draw a bar chart. Set parameters on HTML page and render chart in Demo page. Demo page to display chart at Start.
 
 Parameters
 data - array of numbers, or object with labels and values
@@ -20,6 +79,7 @@ element - the DOM element to be rendered into
 
 Features
 - HTML page where users can enter data
+  - Written Instructions
 - Display single values as vertical bars placed horizontally
 - Stacked/multiple value bar chart
   - each bar can have multiple values
@@ -34,12 +94,14 @@ Options
 - Text label can be top, center or bottom
 - Bar colour - per value for stacked bars
 - Label colour
+  - Colors can be hex or written
 - Spacing between bars
-- Title of bar chart>
+- Title of bar chart
   - Font size
   - Font colour
 
 Extras
+  - clamped options values (ie. max spacing size)
   - dynamic scaling
   - default values if not given parameters
   - accepts data in multiple formats/syntax
@@ -48,11 +110,19 @@ Extras
     - provide default data or enter your own
     - accept input as string, or use boxes
     - reset button
+  - colour picker
+  - font picker
+  - dark or white background
+  - options visual preview
+  - instruction tooltips
+  - graphics
+  - vertical OR horizontal options
+  - non linear tick values
 */
 
 
 
-/* NSTRUCTIONS - https://web.compass.lighthouselabs.ca/prep/prep/activities/718
+/* INSTRUCTIONS - https://web.compass.lighthouselabs.ca/prep/prep/activities/718
 
 Functional Requirements
 You should have a simple API to draw a bar chart. The function should be used by your HTML page to render the chart into your demo page. The signature of the function should be as follows:
