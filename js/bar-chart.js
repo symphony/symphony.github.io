@@ -1,10 +1,11 @@
-/// test js file for tinkering
+/// JS only script to test and host rendering function
 
 // todo include jquery, set up page
 
 // Global default variable values
 const defaultColors = ["#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
-const defaultLabel = "Value";
+const defaultLabel = "Value ";
+const defaultSubLabel = "Group ";
 const defaultDark = "#333";
 const defaultLight = "#ddd";
 
@@ -22,18 +23,67 @@ const defaultOptions = {
   stackedColors: defaultColors,
   spacing: 4, // px
   ticks: 10,
-  labels: [defaultLabel],
+  labels: [],
   background: "dark"
 }
-const defaultElement = 1;
+const defaultElement = "#chart-1-rendered";
 
 
 // Main Bar Chart Function
 const generateBarChart = function(data, options, element) {
   // initialize values
-  const chartData = defaultData; // array
+  let chartData = [];
   const chartOptions = defaultOptions // object
-  const chartElement = element || defaultElement; // number
+  const chartElement = element || defaultElement; // string
+  chartOptions.labels = generateLabels();
+  chartData = labelData();
+  console.log(chartData);
+
+  function generateLabels() {
+    // check if labels were given, if not then generate defaults
+    if (options.labels) return options.labels;
+    const newArray = [];
+    for (let i = 0; i < data.length; i++) {
+      if (Array.isArray(data[i])) {
+        const subArray = [];
+        for (let j = 0; j < data[i].length; j++) {
+          subArray.push(defaultSubLabel + (j+1));
+        }
+        newArray.push(subArray);
+        continue;
+      }
+      newArray.push(defaultLabel + (i+1));
+    }
+    return newArray;
+  }
+
+  // create object for each data point
+  function labelData() {
+    const newArray = []
+    let i = 0;
+    let keyName = "";
+    for (const value of data) {
+      if (Array.isArray(value)) {
+        const subArray = [];
+        for (let j = 0; j < value.length; j++) {
+          keyName = getLabel(i, j);
+          subArray.push({name: keyName, value: value[j]})
+        }
+        newArray.push(subArray);
+        i++;
+        continue;
+      }
+      keyName = getLabel(i);
+      newArray.push({name: keyName, value: value});
+      // console.log(newArray);
+      i++;
+    }
+    return newArray;
+  }
+
+  function getLabel(i, j) {
+    return chartOptions.labels[i][j] || chartOptions.labels[i];
+  }
 
   // todo auto bar width
 
@@ -45,7 +95,8 @@ const generateBarChart = function(data, options, element) {
 
 
   // test return
-  return [chartData, chartOptions, chartElement];
+  const outputRaw = {chartData, chartOptions, chartElement};
+  return outputRaw;
 }
 
 // todo color type (string/hex) converter function

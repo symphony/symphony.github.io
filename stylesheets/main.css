@@ -73,10 +73,6 @@ h1 a, h2 a, nav a {
   padding-bottom: 20px;
 }
 
-.input-field {
-  padding-bottom: 20px;
-}
-
 /* buttons */
 button {
   width: 120px;
@@ -86,6 +82,7 @@ button {
   padding: 10px;
   cursor: pointer;
   margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .special-button {
