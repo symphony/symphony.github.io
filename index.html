@@ -1,21 +1,69 @@
+<!-- Main Chart DEMO PAGE -->
+
 <!-- Setting up doc -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="stylesheets/main.css">
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
     <script src="js/script.js"></script>
+
+    <!-- Import Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+
     <title>Hello</title>
   </head>
 
+
   <!-- Content -->
-  <header>
-    <h1 class="hidden">Hello</h1>
-  </header>
   <body>
-    <p>Body content</p>
-    <button>Alert me!</button>
+
+    <!-- Header Content -->
+    <header>
+      <div>
+        <h1 id="page-title" class="hidden">Data Visualizer</h1>
+      </div>
+    </header>
+
+
+    <!-- Main Content -->
+
+
+    <!-- User input section -->
+    <div class="main-style input">
+      <div class="input-field">
+        <button class="options-button" id="options-1">Button 1</button>
+        <button class="options-button" id="options-2">Button 2</button>
+      </div>
+
+      <div class="input-field">
+        <button class="options-button" id="options-2">Button 1</button>
+        <button class="options-button" id="options-3">Button 2</button>
+      </div>
+
+      <div class="input-field confirm-field">
+        <button class="" id="button-build" disabled>Build Chart</button>
+      </div>
+
+    </div>
+
+    <hr class="hr-dark results">
+
+    <!-- Chart content -->
+    <div class="main-style results">
+      <h2 class="chart-title" id="chart-1-title">My First Chart</h2>
+      <hr>
+      <div class="chart-body" id="chart-1-chart">
+        <p class="chart-text">Chart content</p>
+      </div>
+
+
+
+    </div> <!-- End main content -->
+
   </body>
 </html>
 

@@ -1,21 +1,102 @@
+/* Styles for DEMO PAGE */
+/* Reset values */
 @import "normalize.css";
+h1, h2, p {
+  margin: 0px;
+  padding: 0px;
+}
+/* Set background and text */
+html {
+  background-color: #282828;
+  color: #ddd;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
 
+/* Align all content center */
 body {
-  margin: 8px;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px 40px;
+  text-align: center;
+  border-radius: 8px;
+
 }
 
+/* remove link underlines  */
 a {
-  text-decoration: none; /* removes link underlines  */
+ text-decoration: none;
 }
 
+hr {
+  height: 2px;
+  width: 20%;
+  background-color: #383838;
+  border-radius: 2px;
+  border: none;
+}
+
+.hr-dark {
+  background-color: #2e2e2e;
+  width: 60%;
+}
+
+h1 {
+  font-weight: 300;
+  padding: 2px 20px;
+  display: inline-block;
+}
+
+h2 {
+  font-weight: 400;
+  color: rgb(132, 240, 213);
+}
+
+/* Removes link colour */
 h1 a, h2 a, nav a {
-  color: inherit; /* Removes link colour */
+  color: inherit;
 }
 
-.test, h1 {
-  color: orange;
+.main-style {
+  padding: 20px 20px 0;
+  background-color: #2e2e2e;
+  border-radius: inherit;
+  margin: inherit;
 }
 
-.test2 {
- display: none;
+.input {
+  text-align: left;
+}
+
+.chart-body {
+  font-size: 18px;
+  padding-bottom: 20px;
+}
+
+.input-field {
+  padding-bottom: 20px;
+}
+
+/* buttons */
+button {
+  width: 120px;
+  background-color:rgb(199, 255, 236);
+  border-width: 0;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.special-button {
+  box-shadow: 0 0 0 4px rgb(224, 114, 175);
+}
+
+button:disabled {
+  cursor: auto;
+  opacity: 90%;
+}
+
+.results {
+  display: none;
 }

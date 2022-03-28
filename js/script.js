@@ -1,13 +1,24 @@
+/// DOM interaction
 $(document).ready(function() {
-  $(".hidden").hover(function() {
-   $(this).css("color", "blue");
-  },
-  function() {
-    $(this).hide();
+  let isReady = false;
+
+
+  // begin functions
+
+  // Show confirm button
+  $(".options-button").click(function() {
+    isReady = true;
+    if (isReady) {
+      $("#button-build").prop("disabled", false).addClass("special-button").text("Build Chart");
+    }
   });
 
-  $("button").click(function() {
-    alert("Hello");
+  // Build graph on button click
+  $("#button-build").click(function() {
+    $(this).text("Well done!").removeClass("special-button"),
+    $(".results").css("display", "block");
+    isReady = false;
   });
 
-}); // end of jquery
+
+});

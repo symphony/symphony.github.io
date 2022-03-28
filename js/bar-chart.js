@@ -5,8 +5,8 @@
 // Global default variable values
 const defaultColors = ["#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
 const defaultLabel = "Value";
-const defaultDark = "#222";
-const defaultLight = "#eee";
+const defaultDark = "#333";
+const defaultLight = "#ddd";
 
 
 // Default Objects
@@ -19,10 +19,10 @@ const defaultOptions = {
   title: "My Chart",
   titleColor: "#000",
   titleSize: 14, // in pixels,
-  stackedColor: defaultColors,
-  spacing: 2, // px
+  stackedColors: defaultColors,
+  spacing: 4, // px
   ticks: 10,
-  label: defaultLabel + 1, // todo create dynamic label generator
+  labels: [defaultLabel],
   background: "dark"
 }
 const defaultElement = 1;
@@ -51,6 +51,8 @@ const generateBarChart = function(data, options, element) {
 // todo color type (string/hex) converter function
 // todo size type converter
 
+
+
 // Test Data
 const testData = [1, 22, [7, 4, 2], 17];
 const testOptions = {
@@ -61,12 +63,29 @@ const testOptions = {
   titleColor: 0, // default
   // titleSize: 0,
   stackedColor: ["red", "#FF3"],
-  spacing: 4,
+  spacing: 2,
   ticks: 6
-}
+};
 const testElement = 0;
 
+// test
 console.log(generateBarChart(testData, testOptions, testElement));
+
+/* TODO next steps
+  - set up basic HTML demo page 2h
+  - set up basic CSS 1h
+  - Set up DOM + jquery interaction test script 4h
+  - test interaction with test data (create a chart) 2h
+  - create bar chart generator function 16h
+  - create bar chart DOM interaction script 8h
+  - set up basic HTML input page 4h
+  - test input page interaction 2h
+  - build full input page 8h
+  - design CSS 8h
+  - program extras 8h
+
+  Estimated hours * 2 probably
+*/
 
 
 /* Project Description
