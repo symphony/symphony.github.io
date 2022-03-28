@@ -35,9 +35,9 @@ function buildChart(data, options, element) {
   $(this).text("Well done!").removeClass("special-button"),
     $(".results").css("display", "block");
   isReady = false;
-  const testData = [1, 2, 3];
-  const testOptions = {labels: ["1", "2", "3"]};
+  const testData = [1, 9, [1, 5, 2], 4];
+  const testOptions = {labels: testData};
   const testElement = "#my-chart"
   // eslint-disable-next-line no-undef
-  generateBarChart(testData, testOptions, testElement);
+  $("#chart-1-chart").text(generateBarChart(testData));
 }

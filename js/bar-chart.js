@@ -1,6 +1,6 @@
 /// JS only script to test and host rendering function
 
-// todo include jquery, set up page
+
 
 // Global default variable values
 const defaultColors = ["#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
@@ -10,43 +10,50 @@ const defaultDark = "#333";
 const defaultLight = "#ddd";
 
 
-// Default Objects
+// Default Data
 const defaultData = [0, 2, 4, 6];
 const defaultOptions = {
   barColor: defaultColors[0],
   valuePos: "center",
   valueColor: "light",
-  labelColor: "black",
+  labelColor: defaultDark,
   title: "My Chart",
-  titleColor: "#000",
+  titleColor: defaultDark,
   titleSize: 14, // in pixels,
   stackedColors: defaultColors,
   spacing: 4, // px
   ticks: 10,
   labels: [],
   background: "dark"
-}
-const defaultElement = "#chart-1-rendered";
+};
+const defaultElement = "#chart-1-rendered"; // class or id name
 
 
 // Main Bar Chart Function
-const generateBarChart = function(data, options, element) {
+function generateBarChart(data, options, element) {
   // initialize values
-  let chartData = [];
-  const chartOptions = defaultOptions // object
+  let chartData = data || defaultData; // array
+  const chartOptions = defaultOptions; // object
   const chartElement = element || defaultElement; // string
+
+  // run helper functions
   chartOptions.labels = generateLabels();
   chartData = labelData();
-  console.log(chartData);
 
+  // build and return data
+  const outputRaw = buildHtml();
+  return outputRaw;
+
+
+  // Helper functions
   function generateLabels() {
-    // check if labels were given, if not then generate defaults
-    if (options.labels) return options.labels;
+    // check if labels were given, if not then generate defaults based on data length
+    if (options && options.labels) return options.labels;
     const newArray = [];
-    for (let i = 0; i < data.length; i++) {
-      if (Array.isArray(data[i])) {
+    for (let i = 0; i < chartData.length; i++) {
+      if (Array.isArray(chartData[i])) {
         const subArray = [];
-        for (let j = 0; j < data[i].length; j++) {
+        for (let j = 0; j < chartData[i].length; j++) {
           subArray.push(defaultSubLabel + (j+1));
         }
         newArray.push(subArray);
@@ -54,8 +61,10 @@ const generateBarChart = function(data, options, element) {
       }
       newArray.push(defaultLabel + (i+1));
     }
+    chartData = [];
     return newArray;
   }
+
 
   // create object for each data point
   function labelData() {
@@ -75,7 +84,6 @@ const generateBarChart = function(data, options, element) {
       }
       keyName = getLabel(i);
       newArray.push({name: keyName, value: value});
-      // console.log(newArray);
       i++;
     }
     return newArray;
@@ -85,24 +93,19 @@ const generateBarChart = function(data, options, element) {
     return chartOptions.labels[i][j] || chartOptions.labels[i];
   }
 
-  // todo auto bar width
+  function buildHtml() {
+    let raw = {chartData, chartOptions, chartElement};
 
-  // todo auto bar height
-
-  // todo auto whole chart width
-
-  // todo auto chart height based on largest tick
-
-
-  // test return
-  const outputRaw = {chartData, chartOptions, chartElement};
-  return outputRaw;
+    return raw;
+  }
 }
+// End main function
+
+
+
 
 // todo color type (string/hex) converter function
 // todo size type converter
-
-
 
 // Test Data
 const testData = [1, 22, [7, 4, 2], 17];
@@ -119,23 +122,23 @@ const testOptions = {
 };
 const testElement = 0;
 
-// test
-console.log(generateBarChart(testData, testOptions, testElement));
+generateBarChart(testData, testOptions, testElement);
+
+
+
 
 /* TODO next steps
-  - set up basic HTML demo page 2h
-  - set up basic CSS 1h
-  - Set up DOM + jquery interaction test script 4h
-  - test interaction with test data (create a chart) 2h
+  // - set up basic HTML demo page 2h
+  // - set up basic CSS 1h
+  // - set up basic HTML input page 2h
+  // - test input page interaction 2h
+  // - Set up DOM + jquery interaction test script 4h
+  - test interaction with test data (create a chart) 4h
   - create bar chart generator function 16h
   - create bar chart DOM interaction script 8h
-  - set up basic HTML input page 4h
-  - test input page interaction 2h
   - build full input page 8h
   - design CSS 8h
-  - program extras 8h
-
-  Estimated hours * 2 probably
+  - program extras 16h
 */
 
 

@@ -20,7 +20,6 @@ body {
   padding: 20px 40px;
   text-align: center;
   border-radius: 8px;
-
 }
 
 /* remove link underlines  */
@@ -69,7 +68,7 @@ h1 a, h2 a, nav a {
 }
 
 .chart-body {
-  font-size: 18px;
+  font-size: 16px;
   padding-bottom: 20px;
 }
 
