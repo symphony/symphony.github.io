@@ -1,5 +1,5 @@
-/// JS only script to test and host rendering function
-
+/// Helper JS script
+// function gets object data from API and formats and returns populated object, filling in default values where necessary
 
 
 // Global default variable values
@@ -21,82 +21,91 @@ const defaultOptions = {
   titleColor: defaultDark,
   titleSize: 14, // in pixels,
   stackedColors: defaultColors,
+  hasStacked: false,
   spacing: 4, // px
+  max: 100,
+  min: 0,
   ticks: 10,
   labels: [],
   background: "dark"
 };
-const defaultElement = "#chart-1-rendered"; // class or id name
+const defaultElement = "#chart-1"; // class or id name
 
 
 // Main Bar Chart Function
-function generateBarChart(data, options, element) {
+function formatObject(uData, uOptions, uElement) {
   // initialize values
-  let chartData = data || defaultData; // array
-  const chartOptions = defaultOptions; // object
-  const chartElement = element || defaultElement; // string
+  let data = uData || defaultData; // array
+  const options = defaultOptions; // object
+  const element = uElement || defaultElement; // string
 
   // run helper functions
-  chartOptions.labels = generateLabels();
-  chartData = labelData();
+  replaceOptions();
+  options.hasStacked = checkForStacked();
+  getMinMax();
+  setTickSize();
+  data = pairDataWithNames();
 
   // build and return data
-  const outputRaw = buildHtml();
-  return outputRaw;
+  const barObject = {data, options, element};
+  return barObject;
+
 
 
   // Helper functions
-  function generateLabels() {
-    // check if labels were given, if not then generate defaults based on data length
-    if (options && options.labels) return options.labels;
-    const newArray = [];
-    for (let i = 0; i < chartData.length; i++) {
-      if (Array.isArray(chartData[i])) {
-        const subArray = [];
-        for (let j = 0; j < chartData[i].length; j++) {
-          subArray.push(defaultSubLabel + (j+1));
-        }
-        newArray.push(subArray);
-        continue;
-      }
-      newArray.push(defaultLabel + (i+1));
+  // Replace Default Options values if given
+  function replaceOptions() {
+    for (const key in uOptions) {
+      options[key] = uOptions[key];
     }
-    chartData = [];
-    return newArray;
   }
 
+  function checkForStacked() {
+    for (const i of data) {
+      if (Array.isArray(i)) return true;
+    }
+    return false;
+  }
 
-  // create object for each data point
-  function labelData() {
+  function getMinMax() {
+    const flat = data.flat();
+    options.min = Math.min(...flat);
+    options.max = Math.max(...flat);
+  }
+
+  function setTickSize() {
+    // TODO find logical tick size
+    console.log("Suggested tick " + options.max - options.min / 10) | 0;
+  }
+
+  // pair each data point with label name
+  function pairDataWithNames() {
     const newArray = []
     let i = 0;
     let keyName = "";
-    for (const value of data) {
+    for (let value of uData) {
       if (Array.isArray(value)) {
         const subArray = [];
         for (let j = 0; j < value.length; j++) {
-          keyName = getLabel(i, j);
+          keyName = generateSubLabel(j);
           subArray.push({name: keyName, value: value[j]})
         }
-        newArray.push(subArray);
-        i++;
-        continue;
+        value = subArray;
       }
-      keyName = getLabel(i);
+      keyName = generateLabel(i);
       newArray.push({name: keyName, value: value});
       i++;
     }
     return newArray;
   }
 
-  function getLabel(i, j) {
-    return chartOptions.labels[i][j] || chartOptions.labels[i];
+
+  function generateLabel(i) {
+    return defaultLabel + (i+1);
   }
 
-  function buildHtml() {
-    let raw = {chartData, chartOptions, chartElement};
-
-    return raw;
+  function generateSubLabel(i) {
+    return defaultSubLabel + (i+1);
   }
 }
 // End main function
@@ -107,7 +116,8 @@ function generateBarChart(data, options, element) {
 // todo color type (string/hex) converter function
 // todo size type converter
 
-// Test Data
+
+//  Test Data
 const testData = [1, 22, [7, 4, 2], 17];
 const testOptions = {
   // barColor: "blue",
@@ -122,8 +132,7 @@ const testOptions = {
 };
 const testElement = 0;
 
-generateBarChart(testData, testOptions, testElement);
-
+console.log(formatObject(testData, testOptions, testElement));
 
 
 

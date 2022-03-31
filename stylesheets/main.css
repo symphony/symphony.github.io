@@ -15,7 +15,7 @@ html {
 
 /* Align all content center */
 body {
-  max-width: 800px;
+  min-width: 400px;
   margin: 20px auto;
   padding: 20px 40px;
   text-align: center;
@@ -27,6 +27,7 @@ a {
  text-decoration: none;
 }
 
+/* needs to be in script.js */
 hr {
   height: 2px;
   width: 20%;
@@ -56,20 +57,23 @@ h1 a, h2 a, nav a {
   color: inherit;
 }
 
-.main-style {
-  padding: 20px 20px 0;
+.main-style  {
+  padding: 20px 20px ;
   background-color: #2e2e2e;
   border-radius: inherit;
   margin: inherit;
 }
 
-.input {
+.input-container {
+  max-width: 800px;
+}
+
+.input-row {
   text-align: left;
 }
 
-.chart-body {
-  font-size: 16px;
-  padding-bottom: 20px;
+.last-elem {
+  margin-bottom: -20px;
 }
 
 /* buttons */
@@ -95,4 +99,21 @@ button:disabled {
 
 .results {
   display: none;
+}
+
+/* Todo Chart styling should be provided by script.js */
+.chart-container {
+  margin: 20px;
+  padding: 20px 20px ;
+  background-color: #333;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+.chart-body {
+  background-color: #222;
+  margin: 20px;
+  padding: 20px;
+  font-size: 16px;
+  border-radius: 8px;
 }

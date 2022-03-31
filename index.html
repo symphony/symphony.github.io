@@ -6,10 +6,10 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="stylesheets/main.css">
-    <!-- https://code.jquery.com/jquery-3.6.0.slim.min.js -->
+    <!-- https://code.jquery.com/jquery-3.6.0.js -->
     <script src="js/jquery.js"></script>
-    <script src="js/script.js"></script>
     <script src="js/bar-chart.js"></script>
+    <script src="js/script.js"></script>
 
     <!-- Import Google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,18 +35,18 @@
 
 
     <!-- User input section -->
-    <div class="main-style input">
-      <div class="input-field">
+    <div class="main-style input-container">
+      <div class="input-row">
         <button class="options-button" id="options-1">Button 1</button>
         <button class="options-button" id="options-2">Button 2</button>
       </div>
 
-      <div class="input-field">
+      <div class="input-row">
         <button class="options-button" id="options-2">Button 1</button>
         <button class="options-button" id="options-3">Button 2</button>
       </div>
 
-      <div class="input-field confirm-field">
+      <div class="input-row confirm-row last-elem">
         <button class="" id="button-build" disabled>Build Chart</button>
       </div>
 
@@ -56,12 +56,30 @@
 
     <!-- Chart content -->
     <div class="main-style results">
-      <h2 class="chart-title" id="chart-1-title">My First Chart</h2>
-      <hr>
-      <div class="chart-body" id="chart-1-chart">
-        <p class="chart-text">Chart content</p>
-      </div>
 
+      <!-- Script will build Chart inside div below -->
+      <div class="slide" id="my-chart">
+
+      </div>
+      <!-- end script -->
+    </div>
+
+
+
+    <!-- Additional charts -->
+    <!-- <hr class="hr-dark results"> -->
+
+    <!-- Sample chart -->
+    <!-- <div class="main-style results">
+      <div id="sample-chart">
+        <h2 class="chart-title" id="chart-1-title">My Test Chart</h2>
+        <hr>
+        <div class="chart-body" id="chart-1-chart">
+          <p class="chart-text">Chart content</p>
+        </div>
+      </div>
+    </div>
+ -->
 
 
     </div> <!-- End main content -->
