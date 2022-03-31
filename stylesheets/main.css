@@ -79,7 +79,7 @@ h1 a, h2 a, nav a {
 /* buttons */
 button {
   width: 120px;
-  background-color:rgb(199, 255, 236);
+  background-color:#c7ffec;
   border-width: 0;
   border-radius: 6px;
   padding: 10px;
@@ -101,19 +101,3 @@ button:disabled {
   display: none;
 }
 
-/* Todo Chart styling should be provided by script.js */
-.chart-container {
-  margin: 20px;
-  padding: 20px 20px ;
-  background-color: #333;
-  border-radius: 8px;
-  overflow: auto;
-}
-
-.chart-body {
-  background-color: #222;
-  margin: 20px;
-  padding: 20px;
-  font-size: 16px;
-  border-radius: 8px;
-}

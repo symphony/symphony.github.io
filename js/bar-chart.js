@@ -3,10 +3,10 @@
 
 
 // Global default variable values
-const defaultColors = ["#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
+const defaultColors = ["#98b7d6", "#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
 const defaultLabel = "Value ";
 const defaultSubLabel = "Group ";
-const defaultDark = "#333";
+const defaultDark = "#222";
 const defaultLight = "#ddd";
 
 
@@ -15,19 +15,21 @@ const defaultData = [0, 2, 4, 6];
 const defaultOptions = {
   barColor: defaultColors[0],
   valuePos: "center",
-  valueColor: "light",
-  labelColor: defaultDark,
-  title: "My Chart",
+  valueColor: "#006483",
+  labelColor: defaultLight,
+  title: "Generated Chart",
   titleColor: defaultDark,
-  titleSize: 14, // in pixels,
+  titleSize: "14px",
   stackedColors: defaultColors,
   hasStacked: false,
-  spacing: 4, // px
+  spacing: "40px",
   max: 100,
   min: 0,
   ticks: 10,
   labels: [],
-  background: "dark"
+  background: "light",
+  dark: defaultDark,
+  light: defaultLight
 };
 const defaultElement = "#chart-1"; // class or id name
 
@@ -75,7 +77,7 @@ function formatObject(uData, uOptions, uElement) {
 
   function setTickSize() {
     // TODO find logical tick size
-    console.log("Suggested tick " + options.max - options.min / 10) | 0;
+    console.log("Suggested tick " + ((options.max - options.min) / 10));
   }
 
   // pair each data point with label name
@@ -116,7 +118,7 @@ function formatObject(uData, uOptions, uElement) {
 // todo color type (string/hex) converter function
 // todo size type converter
 
-
+/*
 //  Test Data
 const testData = [1, 22, [7, 4, 2], 17];
 const testOptions = {
@@ -134,7 +136,7 @@ const testElement = 0;
 
 console.log(formatObject(testData, testOptions, testElement));
 
-
+ */
 
 /* TODO next steps
   // - set up basic HTML demo page 2h
