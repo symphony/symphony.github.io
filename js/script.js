@@ -1,7 +1,14 @@
 /// Main jQuery Script
 
 // Init variables
-let isReady = false;
+let readyToBuild = false;
+
+// Todo replace test data with user data
+const testData = [1, 9, 5, 4, 8, 12, 9];
+const testOptions = {
+  title: "My First Chart",
+  titleColor: "rgb(132, 240, 213)"};
+const testElement = "#my-chart"
 
 /// Begin DOM listening/interaction
 $(document).ready(function() {
@@ -9,53 +16,54 @@ $(document).ready(function() {
 
   // Show confirm button
   $(".options-button").click(function() {
-    setOptions();
+    verifyParameters();
   });
 
   // Build graph on button click
   $("#button-build").click(function() {
-    buildChart(this);
+    if (!readyToBuild) return;
+    $(this).text("Well done!").removeClass("special-button")
+    startBuildingChart();
   });
 
 
 }); // End Document Ready
 
-
-function setOptions() {
-  isReady = true;
-  if (isReady) {
-    $("#button-build").prop("disabled", false).addClass("special-button").text("Build Chart");
-  }
+// Functions
+// Verifies there's no conflicting options
+function verifyParameters() {
+  // Todo add some checks before build button is ready
+  readyToBuild = true;
+  if (!readyToBuild) return;
+  $("#button-build").prop("disabled", false).addClass("special-button").text("Build Chart");
 }
 
-function buildChart(button) {
-  $(button).text("Well done!").removeClass("special-button")
-
-  // Todo replace test data with user data
-  const testData = [1, 9, 5, 4, 8, 12, 9];
-  const testOptions = {
-    title: "My First Chart",
-    titleColor: "rgb(132, 240, 213)"};
-  const testElement = "#my-chart"
-
-  // external function in bar-chart.js
+// Build chart with user data and settings
+function startBuildingChart() {
+  // External function in bar-chart.js
+  // Fills empty parameters with default ones and saves some restructures object data
   // eslint-disable-next-line no-undef
   const barObject = formatObject(testData, testOptions, testElement);
 
+  // Renders Bar Chart
   generateBarChart(barObject.data, barObject.options, barObject.element);
+
+  // Shares raw HTML text to be copied
   outputRaw(barObject.element);
 }
 
+// Creates and renders the bar chart elements
 function generateBarChart(data, options, element) {
-  // Check if element exists
+  // Check if element exists and return error
   if (!$(element).length) {
     return alert("Can't find element \"" + element + "\".");
   }
 
   // Check if already created to prevent duplicate
   if ($("#chart").length) return;
+  readyToBuild = false;
 
-  // Generate DOM elements
+  // Build HTML elements and hierachy
   // Create div to house content
   jQuery("<div>", {
     id: "chart",
@@ -63,22 +71,28 @@ function generateBarChart(data, options, element) {
     title: options.title
   }).appendTo(element);
 
+  // link font
+  jQuery("<link>", {
+    href:"https://fonts.googleapis.com/css2?family=Montserrat",
+    rel: "stylesheet",
+  }).appendTo("#chart");
+
   // create stylesheet
   jQuery("<style>", {
     type:'text/css',
     id: "chart-style",
   }).appendTo("#chart");
 
-
-  // Build HTML elements and hierachy
   // create title
-  jQuery("<h3>", {
+  jQuery("<h2>", {
     id: "title",
     class: "chart-title",
     title: options.title,
   }).appendTo("#chart");
 
-  jQuery("<hr class='.hr'>", {}).appendTo("#chart");
+  jQuery("<hr>", {
+    class: "hr",
+  }).appendTo("#chart");
 
   // create body
   jQuery("<div>", {
@@ -104,7 +118,6 @@ function generateBarChart(data, options, element) {
 
   // Reveal results
   $(".results").slideDown(400);
-  isReady = false;
 
   function addStyles() {
     $("#chart-style").append(`
@@ -117,6 +130,7 @@ function generateBarChart(data, options, element) {
       overflow: auto;
       scroll-padding: 20px;
       text-align: center;
+      font-family: 'Montserrat';
     }
 
     .chart-body {
@@ -163,7 +177,7 @@ function generateBarChart(data, options, element) {
     .hr {
       height: 2px;
       width: 20%;
-      background-color: ${options.defaultLight};
+      background-color: #444;
       border-radius: 2px;
       border: none;
     }

@@ -127,10 +127,6 @@ function formatObject(uData, uOptions, uElement) {
 
 
 
-
-// todo color type (string/hex) converter function
-// todo size type converter
-
 /*
 //  Test Data
 const testData = [1, 22, [7, 4, 2], 17];
@@ -148,8 +144,7 @@ const testOptions = {
 const testElement = 0;
 
 console.log(formatObject(testData, testOptions, testElement));
-
- */
+*/
 
 /* TODO next steps
   // - set up basic HTML demo page 2h
@@ -157,11 +152,14 @@ console.log(formatObject(testData, testOptions, testElement));
   // - set up basic HTML input page 2h
   // - test input page interaction 2h
   // - Set up DOM + jquery interaction test script 4h
-  - test interaction with test data (create a chart) 4h
-  - create bar chart generator function 16h
-  - create bar chart DOM interaction script 8h
+  // - test interaction with test data (create a chart) 8h
+  // - create bar chart generator function 16h
+  // - create bar chart DOM interaction script 8h
+  // - create raw output widget - 4h
   - build full input page 8h
+  - build input functionality 16h
   - design CSS 8h
+  - Tweak functionality 16h
   - program extras 16h
 */
 
@@ -200,6 +198,7 @@ Options
 Extras
   - clamped options values (ie. max spacing size)
   - dynamic scaling
+  - animations
   - default values if not given parameters
   - accepts data in multiple formats/syntax
   - customizable input form
@@ -211,7 +210,8 @@ Extras
   - font picker
   - dark or white background
   - options visual preview
-  - instruction tooltips
+  - instructions
+  - tooltips
   - graphics
   - vertical OR horizontal options
   - non linear tick values
@@ -270,4 +270,4 @@ This should also support all the features of the single bar chart, including
 
 Customizable bar colours, per value
 Customizable label colours
- */
+*/
