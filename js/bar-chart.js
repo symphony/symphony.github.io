@@ -3,14 +3,14 @@
 
 
 // Global default variable values
-const defaultColors = ["#F9FFD8", "#AFD4E4", "#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
+const defaultColors = ["#e8f0c0", "#AFD4E4", "#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
 const defaultLabel = "Value ";
 const defaultSubLabel = "Group ";
 const defaultDark = "#222";
 const defaultLight = "#ddd";
 const defaultValueColor = "#717192";
 const defaultGridColor = "#2B2B30";
-const baseChartWidth = 200;
+const baseChartWidth = 300;
 
 // Default Data
 const defaultData = [0, 2, 4, 6];
@@ -25,7 +25,7 @@ const defaultOptions = {
   titleSize: "14px",
   stackedColors: defaultColors,
   spacing: 20,
-  barWidth: 80,
+  barWidth: 60,
   gridColor: defaultGridColor,
   ticks: 10,
   // values below aren't provided, but are calculated and used for reference later
@@ -33,6 +33,7 @@ const defaultOptions = {
   max: 0,
   min: 0,
   chartWidth: 0,
+  chartWidthMax: 0,
   dark: defaultDark,
   light: defaultLight,
   background: "light"
@@ -87,6 +88,7 @@ function formatObject(uData, uOptions, uElement) {
     const numOfBars = data.length;
     minWidth += numOfBars * (options.barWidth + options.spacing);
     options.chartWidth = minWidth;
+    options.chartWidthMax = minWidth + baseChartWidth;
   }
 
   function setTickSize() {
@@ -157,6 +159,7 @@ console.log(formatObject(testData, testOptions, testElement));
   // - create bar chart DOM interaction script 8h
   // - create raw output widget - 4h
   - build full input page 8h
+  - Add chart grid with tick sizes 4h
   - build input functionality 16h
   - design CSS 8h
   - Tweak functionality 16h

@@ -140,6 +140,7 @@ function generateBarChart(data, options, element) {
       font-size: 20px;
       border-radius: 8px;
       min-width: ${options.chartWidth}px;
+      max-width: ${options.chartWidthMax}px;
     }
 
     .chart-title {
@@ -156,7 +157,7 @@ function generateBarChart(data, options, element) {
       position: relative;
       height: 96%;
       top: 4%;
-      width: inherit;
+      width: 96%;
     }
 
     .bar {
@@ -170,7 +171,8 @@ function generateBarChart(data, options, element) {
       min-height: 4px;
       min-width: ${options.barWidth}px;
       font-weight: 600;
-      border-radius: 12px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
       text-align: center;
     }
 
