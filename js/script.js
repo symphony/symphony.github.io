@@ -37,10 +37,13 @@ function buildChart(button) {
     title: "My First Chart",
     titleColor: "rgb(132, 240, 213)"};
   const testElement = "#my-chart"
+
+  // external function in bar-chart.js
   // eslint-disable-next-line no-undef
   const barObject = formatObject(testData, testOptions, testElement);
 
   generateBarChart(barObject.data, barObject.options, barObject.element);
+  outputRaw(barObject.element);
 }
 
 function generateBarChart(data, options, element) {
@@ -49,7 +52,7 @@ function generateBarChart(data, options, element) {
     return alert("Can't find element \"" + element + "\".");
   }
 
-  // Check if already created
+  // Check if already created to prevent duplicate
   if ($("#chart").length) return;
 
   // Generate DOM elements
@@ -66,6 +69,8 @@ function generateBarChart(data, options, element) {
     id: "chart-style",
   }).appendTo("#chart");
 
+
+  // Build HTML elements and hierachy
   // create title
   jQuery("<h3>", {
     id: "title",
@@ -73,7 +78,7 @@ function generateBarChart(data, options, element) {
     title: options.title,
   }).appendTo("#chart");
 
-  jQuery("<hr>", {}).appendTo("#chart");
+  jQuery("<hr class='.hr'>", {}).appendTo("#chart");
 
   // create body
   jQuery("<div>", {
@@ -86,6 +91,11 @@ function generateBarChart(data, options, element) {
     class: "chart-grid",
   }).appendTo("#body");
 
+  jQuery("<div>", {
+    id: "bar-container",
+    class: "bar-container",
+  }).appendTo("#grid");
+
 
   // Fill elements
   $("#title").text(options.title);
@@ -96,7 +106,6 @@ function generateBarChart(data, options, element) {
   $(".results").slideDown(400);
   isReady = false;
 
-
   function addStyles() {
     $("#chart-style").append(`
 
@@ -106,14 +115,17 @@ function generateBarChart(data, options, element) {
       background-color: #333;
       border-radius: 8px;
       overflow: auto;
+      scroll-padding: 20px;
+      text-align: center;
     }
 
     .chart-body {
       background-color: ${options.dark};
       margin: 20px auto;
       padding: 20px;
-      font-size: 16px;
+      font-size: 20px;
       border-radius: 8px;
+      min-width: ${options.chartWidth}px;
     }
 
     .chart-title {
@@ -122,46 +134,71 @@ function generateBarChart(data, options, element) {
     }
 
     .chart-grid {
-      background-color: #2e2e2e;
+      background-color: ${options.gridColor};
+      min-width: ${options.chartWidth}px;
+    }
+
+    .bar-container {
+      position: relative;
+      height: 96%;
+      top: 4%;
+      width: inherit;
     }
 
     .bar {
       display: inline-block;
-      background-color: ${options.barColor};
-      font-weight: 600;
-      color: ${options.valueColor};
-      padding: 40px 40px;
-      margin-right: ${options.spacing};
-      min-height: 4px;
+      box-sizing: border-box;
+      padding: 20px 0;
       vertical-align: bottom;
-      border-radius: 8px;
+      margin: 0 ${options.spacing}px;
+      background-color: ${options.barColor};
+      color: ${options.valueColor};
+      min-height: 4px;
+      min-width: ${options.barWidth}px;
+      font-weight: 600;
+      border-radius: 12px;
+      text-align: center;
     }
 
-    `)
+    .hr {
+      height: 2px;
+      width: 20%;
+      background-color: ${options.defaultLight};
+      border-radius: 2px;
+      border: none;
+    }
+`)
   }
 
     function createBars() {
       $("#grid").css({height: "600px"});
+      $("#grid").css("min-width", options.chartWidth);
+
       for (const i of data) {
         jQuery("<bar>", {
           id: i.name,
           class: "bar",
           text: i.value,
           css: { "height": getBarHeight(i.value)}
-        }).appendTo("#grid");
+        }).appendTo("#bar-container");
       }
 
       // returns heigh as percentage based on min and max values
-    function getBarHeight(v) {
-      let height = v - options.min;
+    function getBarHeight(barValue) {
+      let height = barValue - options.min;
       height = height / (options.max - options.min);
-      height *= 80; // convert to percentage scaled to 80%
-      console.log(height);
+      height *= 100; // convert to percentage
       return height + "%";
     }
   }
 
+}
 
-
+function outputRaw(element){
+  const $snippet = $("#results-raw").append($(element).clone());
+  // converts HTML element to text
+  $snippet.text($snippet.html());
+  // adds new lines for legibility between tags
+  $($snippet).text($snippet.text().replace(/></g, ">\n<"));
 }
 

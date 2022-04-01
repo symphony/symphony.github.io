@@ -60,11 +60,13 @@ h1 a, h2 a, nav a {
 .main-style  {
   padding: 20px 20px ;
   background-color: #2e2e2e;
+  color: #ddd;
   border-radius: inherit;
   margin: inherit;
+  max-width: 2000px;
 }
 
-.input-container {
+.fixed-width {
   max-width: 800px;
 }
 
@@ -74,6 +76,11 @@ h1 a, h2 a, nav a {
 
 .last-elem {
   margin-bottom: -20px;
+}
+
+textarea {
+  min-width: 400px;
+  min-height: 100px;
 }
 
 /* buttons */

@@ -3,33 +3,39 @@
 
 
 // Global default variable values
-const defaultColors = ["#98b7d6", "#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
+const defaultColors = ["#F9FFD8", "#AFD4E4", "#036", "#20b2aa", "#468499", "#b4eeb4", "#00ced1"]; // dark blues and greens
 const defaultLabel = "Value ";
 const defaultSubLabel = "Group ";
 const defaultDark = "#222";
 const defaultLight = "#ddd";
-
+const defaultValueColor = "#717192";
+const defaultGridColor = "#2B2B30";
+const baseChartWidth = 200;
 
 // Default Data
 const defaultData = [0, 2, 4, 6];
 const defaultOptions = {
+  labels: [],
   barColor: defaultColors[0],
   valuePos: "center",
-  valueColor: "#006483",
+  valueColor: defaultValueColor,
   labelColor: defaultLight,
   title: "Generated Chart",
   titleColor: defaultDark,
   titleSize: "14px",
   stackedColors: defaultColors,
-  hasStacked: false,
-  spacing: "40px",
-  max: 100,
-  min: 0,
+  spacing: 20,
+  barWidth: 80,
+  gridColor: defaultGridColor,
   ticks: 10,
-  labels: [],
-  background: "light",
+  // values below aren't provided, but are calculated and used for reference later
+  hasStacked: false,
+  max: 0,
+  min: 0,
+  chartWidth: 0,
   dark: defaultDark,
-  light: defaultLight
+  light: defaultLight,
+  background: "light"
 };
 const defaultElement = "#chart-1"; // class or id name
 
@@ -45,6 +51,7 @@ function formatObject(uData, uOptions, uElement) {
   replaceOptions();
   options.hasStacked = checkForStacked();
   getMinMax();
+  calculateWidths();
   setTickSize();
   data = pairDataWithNames();
 
@@ -75,6 +82,13 @@ function formatObject(uData, uOptions, uElement) {
     options.max = Math.max(...flat);
   }
 
+  function calculateWidths () {
+    let minWidth = baseChartWidth; // 200px
+    const numOfBars = data.length;
+    minWidth += numOfBars * (options.barWidth + options.spacing);
+    options.chartWidth = minWidth;
+  }
+
   function setTickSize() {
     // TODO find logical tick size
     console.log("Suggested tick " + ((options.max - options.min) / 10));
@@ -100,7 +114,6 @@ function formatObject(uData, uOptions, uElement) {
     }
     return newArray;
   }
-
 
   function generateLabel(i) {
     return defaultLabel + (i+1);

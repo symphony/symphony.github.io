@@ -35,7 +35,7 @@
 
 
     <!-- User input section -->
-    <div class="main-style input-container">
+    <div class="main-style fixed-width input-container">
       <div class="input-row">
         <button class="options-button" id="options-1">Button 1</button>
         <button class="options-button" id="options-2">Button 2</button>
@@ -55,32 +55,23 @@
     <hr class="hr-dark results">
 
     <!-- Chart content -->
-    <div class="main-style results">
+    <div class="main-style results" id="results-box">
 
       <!-- Script will build Chart inside div below -->
-      <div class="slide" id="my-chart">
+      <div id="my-chart"></div>
+      <!-- end render -->
 
-      </div>
-      <!-- end script -->
+
     </div>
 
 
-
-    <!-- Additional charts -->
-    <!-- <hr class="hr-dark results"> -->
-
-    <!-- Sample chart -->
-    <!-- <div class="main-style results">
-      <div id="sample-chart">
-        <h2 class="chart-title" id="chart-1-title">My Test Chart</h2>
-        <hr>
-        <div class="chart-body" id="chart-1-chart">
-          <p class="chart-text">Chart content</p>
-        </div>
-      </div>
+    <!-- Widget Output -->
+    <hr class="hr-dark results">
+    <div class="main-style fixed-width results">
+      <h2>HTML Widget</h2>
+      <hr>
+      <textarea class="main-style" id="results-raw" contenteditable></textarea>
     </div>
- -->
-
 
     </div> <!-- End main content -->
 
