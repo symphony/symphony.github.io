@@ -66,8 +66,9 @@ h1 a, h2 a, nav a {
   max-width: 2000px;
 }
 
-.fixed-width {
-  max-width: 800px;
+.outer-container {
+  min-width: 700px;
+  max-width: 80%;
 }
 
 .input-row {

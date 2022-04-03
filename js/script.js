@@ -207,11 +207,12 @@ function generateBarChart(data, options, element) {
       return height + "%";
     }
   }
-
 }
 
 function outputRaw(element){
-  const $snippet = $("#results-raw").append($(element).clone());
+  const $snippet = $("#results-raw")
+  // Clears text field and replaces with chart element
+  $snippet.empty().append($(element).clone());
   // converts HTML element to text
   $snippet.text($snippet.html());
   // adds new lines for legibility between tags
