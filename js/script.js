@@ -12,24 +12,19 @@ const testOptions = {
 const testElement = "#my-chart"
 
 // Real data
-const userData = [];
+let userData = [];
 let userOptions = {};
 let userElement = "";
 
 /// Begin DOM listening/interaction
 $(document).ready(function() {
-  // begin functions
-  const $inputData = $("#input-data");
-  const $inputOptions = testOptions;
-  const $inputElement = testElement;
+
 
 
   // Show confirm button
   $("#verify-button").click(function() {
-    userData.push(...($inputData).value().split(", "));
-    userOptions = $inputOptions;
-    userElement = $inputElement;
-    submitParameters(userData, userOptions, userElement);
+    submitParameters();
+    if (!readyToBuild) alert("Please verify entry forms")
   });
 
   // Build graph on button click
@@ -44,10 +39,24 @@ $(document).ready(function() {
 
 // Functions
 // Verifies there's no conflicting options
-function submitParameters($data, $options, $element) {
+function submitParameters() {
+  // Collect input data
+  const $inputData = $("#input-data");
+  const $inputOptions = testOptions;
+  const $inputElement = testElement;
+  const valueStrings = $inputData.val().replaceAll(" ","").split(",");
+
+  // Clear global vars
+  userData = [];
+  userOptions = {};
+  userElement = "";
+
+  // Save new data to global vars
+  valueStrings.forEach(a => userData.push(parseFloat(a)));
+  userOptions = $inputOptions;
+  userElement = $inputElement;
+
   console.log(userData);
-
-
   // Todo add some checks before build button is ready
   readyToBuild = true;
   if (!readyToBuild) return;
@@ -59,7 +68,7 @@ function startBuildingChart() {
   // External function in bar-chart.js
   // Fills empty parameters with default ones and saves some restructures object data
   // eslint-disable-next-line no-undef
-  const barObject = formatObject(testData, testOptions, testElement);
+  const barObject = formatObject(userData, testOptions, testElement);
 
   // Renders Bar Chart
   generateBarChart(barObject.data, barObject.options, barObject.element);
@@ -75,8 +84,10 @@ function generateBarChart(data, options, element) {
     return alert("Can't find element \"" + element + "\".");
   }
 
+
+
   // Check if already created to prevent duplicate
-  if ($("#chart").length) return;
+  $(element).empty();
   readyToBuild = false;
 
   // Build HTML elements and hierachy
@@ -183,6 +194,7 @@ function generateBarChart(data, options, element) {
       color: ${options.valueColor};
       min-height: 4px;
       min-width: ${options.barWidth}px;
+      max-width: ${options.barWidth}px;
       font-weight: 600;
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;

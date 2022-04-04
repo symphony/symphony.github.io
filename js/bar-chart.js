@@ -10,7 +10,7 @@ const defaultDark = "#222";
 const defaultLight = "#ddd";
 const defaultValueColor = "#717192";
 const defaultGridColor = "#2B2B30";
-const baseChartWidth = 110;
+const baseChartWidth = 200;
 
 // Default Data
 const defaultData = [0, 2, 4, 6];
@@ -87,7 +87,7 @@ function formatObject(uData, uOptions, uElement) {
   function calculateWidths () {
     let minWidth = baseChartWidth;
     const numOfBars = data.length;
-    minWidth += numOfBars * (options.barWidth + options.spacing);
+    minWidth += numOfBars * (options.barWidth + options.spacing) * 1.1;
     options.chartWidth = minWidth;
     options.chartWidthMax = minWidth + baseChartWidth;
   }
