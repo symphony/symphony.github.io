@@ -87,6 +87,8 @@ function formatObject(uData, uOptions, uElement) {
   function calculateWidths () {
     let minWidth = baseChartWidth;
     const numOfBars = data.length;
+    // const scalePercentage = 1 / (1 + (numOfBars * 0.1));
+    // options.barWidth *= scalePercentage;
     minWidth += numOfBars * (options.barWidth + options.spacing) * 1.1;
     options.chartWidth = minWidth;
     options.chartWidthMax = minWidth + baseChartWidth;

@@ -69,12 +69,12 @@ h1 a, h2 a, nav a {
   color: #ddd;
   border-radius: inherit;
   margin: inherit;
-  max-width: 2000px;
+  max-width: 2200px;
 }
 
 .outer-container {
   min-width: 700px;
-  max-width: 80%;
+  max-width: 95%;
 }
 
 .input-row {
