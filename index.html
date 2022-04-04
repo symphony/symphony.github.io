@@ -5,7 +5,7 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="stylesheets/main.css">
+    <!-- <link rel="stylesheet" href="stylesheets/main.css"> -->
     <!-- https://code.jquery.com/jquery-3.6.0.js -->
     <script src="js/jquery.js"></script>
     <script src="js/bar-chart.js"></script>
@@ -35,17 +35,23 @@
     <!-- User input section -->
     <div class="main-style outer-container input-container">
       <div class="input-row">
-        <button class="options-button" id="options-1">Button 1</button>
-        <button class="options-button" id="options-2">Button 2</button>
+        <h2>Chart Data and Settings</h2>
+        <hr class="left"><br>
       </div>
+      <div class="input-row">
+        <label for="input-data">Enter your values separated by commas.</label>
+        <input type="text" class="text-input" id="input-data" name="input-data" placeholder="1, 2, 3, 4, 5.."></input>
 
       <div class="input-row">
-        <button class="options-button" id="options-2">Button 1</button>
-        <button class="options-button" id="options-3">Button 2</button>
+        <input type="text" class="text-input" id="options-2"></input>
+        <input type="text" class="text-input" id="options-2"></input>
       </div>
-
-      <div class="input-row confirm-row last-elem">
-        <button class="" id="button-build" disabled>Build Chart</button>
+      <div class="input-row">
+        <hr class="left" style="margin-top: 20px"><br>
+      </div>
+      <div class="input-row confirm-row">
+        <button class="" id="verify-button">Apply</button>
+        <button class="" id="button-build" disabled>Build Chart</input>
       </div>
 
     </div>

@@ -10,7 +10,7 @@ const defaultDark = "#222";
 const defaultLight = "#ddd";
 const defaultValueColor = "#717192";
 const defaultGridColor = "#2B2B30";
-const baseChartWidth = 300;
+const baseChartWidth = 110;
 
 // Default Data
 const defaultData = [0, 2, 4, 6];
@@ -24,14 +24,15 @@ const defaultOptions = {
   titleColor: defaultDark,
   titleSize: "14px",
   stackedColors: defaultColors,
-  spacing: 20,
-  barWidth: 60,
+  spacing: 15,
+  barWidth: 40,
   gridColor: defaultGridColor,
   ticks: 10,
   // values below aren't provided, but are calculated and used for reference later
   hasStacked: false,
   max: 0,
   min: 0,
+  chartHeight: 400,
   chartWidth: 0,
   chartWidthMax: 0,
   dark: defaultDark,
@@ -84,7 +85,7 @@ function formatObject(uData, uOptions, uElement) {
   }
 
   function calculateWidths () {
-    let minWidth = baseChartWidth; // 200px
+    let minWidth = baseChartWidth;
     const numOfBars = data.length;
     minWidth += numOfBars * (options.barWidth + options.spacing);
     options.chartWidth = minWidth;

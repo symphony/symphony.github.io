@@ -12,7 +12,6 @@ html {
   font-family: 'Montserrat';
   font-weight: 300;
 }
-
 /* Align all content center */
 body {
   min-width: 400px;
@@ -20,7 +19,9 @@ body {
   padding: 20px 40px;
   text-align: center;
   border-radius: 8px;
+  transition: all 0.2s ease-in-out;
 }
+
 
 /* remove link underlines  */
 a {
@@ -41,6 +42,10 @@ hr {
   width: 60%;
 }
 
+.left {
+  margin: 0 10px;
+}
+
 h1 {
   font-weight: 300;
   padding: 2px 20px;
@@ -50,6 +55,7 @@ h1 {
 h2 {
   font-weight: 400;
   color: rgb(132, 240, 213);
+  padding: 10px;
 }
 
 /* Removes link colour */
@@ -75,8 +81,8 @@ h1 a, h2 a, nav a {
   text-align: left;
 }
 
-.last-elem {
-  margin-bottom: -20px;
+.input-row:last-child {
+  margin-bottom: 20px;
 }
 
 textarea {
@@ -85,24 +91,37 @@ textarea {
 }
 
 /* buttons */
-button {
-  width: 120px;
-  background-color:#c7ffec;
+input, button {
+  color: #260225;
   border-width: 0;
   border-radius: 6px;
   padding: 10px;
-  cursor: pointer;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin: 10px;
 }
 
-.special-button {
-  box-shadow: 0 0 0 4px rgb(224, 114, 175);
+label {
+  display:block;
+  margin: 20px 10px 10px;
+}
+
+input[type="text"] {
+  width: 200px;
+  background-color:#e6eee0;
+}
+
+button {
+  background-color:#c7ffec;
+  width: 120px;
+  cursor: pointer;
 }
 
 button:disabled {
   cursor: auto;
-  opacity: 90%;
+  opacity: 80%;
+}
+
+.special-button {
+  box-shadow: 0 0 0 4px rgb(224, 114, 175);
 }
 
 .results {

@@ -4,19 +4,32 @@
 let readyToBuild = false;
 
 // Todo replace test data with user data
+// test data
 const testData = [1, 9, 5, 4, 8, 12, 9];
 const testOptions = {
   title: "My First Chart",
   titleColor: "rgb(132, 240, 213)"};
 const testElement = "#my-chart"
 
+// Real data
+const userData = [];
+let userOptions = {};
+let userElement = "";
+
 /// Begin DOM listening/interaction
 $(document).ready(function() {
   // begin functions
+  const $inputData = $("#input-data");
+  const $inputOptions = testOptions;
+  const $inputElement = testElement;
+
 
   // Show confirm button
-  $(".options-button").click(function() {
-    verifyParameters();
+  $("#verify-button").click(function() {
+    userData.push(...($inputData).value().split(", "));
+    userOptions = $inputOptions;
+    userElement = $inputElement;
+    submitParameters(userData, userOptions, userElement);
   });
 
   // Build graph on button click
@@ -31,7 +44,10 @@ $(document).ready(function() {
 
 // Functions
 // Verifies there's no conflicting options
-function verifyParameters() {
+function submitParameters($data, $options, $element) {
+  console.log(userData);
+
+
   // Todo add some checks before build button is ready
   readyToBuild = true;
   if (!readyToBuild) return;
@@ -128,14 +144,13 @@ function generateBarChart(data, options, element) {
       background-color: #333;
       border-radius: 8px;
       overflow: auto;
-      scroll-padding: 20px;
       text-align: center;
       font-family: 'Montserrat';
     }
 
     .chart-body {
       background-color: ${options.dark};
-      margin: 20px auto;
+      margin: 40px auto;
       padding: 20px;
       font-size: 20px;
       border-radius: 8px;
@@ -150,14 +165,12 @@ function generateBarChart(data, options, element) {
 
     .chart-grid {
       background-color: ${options.gridColor};
-      min-width: ${options.chartWidth}px;
     }
 
     .bar-container {
       position: relative;
-      height: 96%;
-      top: 4%;
-      width: 96%;
+      height: 85%;
+      top: 15%;
     }
 
     .bar {
@@ -174,6 +187,12 @@ function generateBarChart(data, options, element) {
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
       text-align: center;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .bar:hover {
+      color: #468499;
+      box-shadow: 0 -5px 20px rgba(183, 130, 221, 0.616);
     }
 
     .hr {
@@ -187,8 +206,8 @@ function generateBarChart(data, options, element) {
   }
 
     function createBars() {
-      $("#grid").css({height: "600px"});
-      $("#grid").css("min-width", options.chartWidth);
+      $("#grid").css({height: options.chartHeight});
+      $("#grid").css("min-width", "inherit");
 
       for (const i of data) {
         jQuery("<bar>", {
