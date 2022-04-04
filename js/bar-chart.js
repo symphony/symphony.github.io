@@ -11,6 +11,9 @@ const defaultLight = "#ddd";
 const defaultValueColor = "#717192";
 const defaultGridColor = "#2B2B30";
 const baseChartWidth = 200;
+const defaultSpacing = 15;
+const defaultBarWidth = 40;
+const defaultTick = 10;
 
 // Default Data
 const defaultData = [0, 2, 4, 6];
@@ -24,10 +27,10 @@ const defaultOptions = {
   titleColor: defaultDark,
   titleSize: "14px",
   stackedColors: defaultColors,
-  spacing: 15,
-  barWidth: 40,
+  spacing: defaultSpacing,
+  barWidth: defaultBarWidth,
   gridColor: defaultGridColor,
-  ticks: 10,
+  tick: defaultTick,
   // values below aren't provided, but are calculated and used for reference later
   hasStacked: false,
   max: 0,
@@ -66,15 +69,11 @@ function formatObject(uData, uOptions, uElement) {
   // Helper functions
   // Replace Default Options values if given
   function replaceOptions() {
-    for (const key in uOptions) {
-      options[key] = uOptions[key];
-    }
+    for (const key in uOptions) options[key] = uOptions[key];
   }
 
   function checkForStacked() {
-    for (const i of data) {
-      if (Array.isArray(i)) return true;
-    }
+    for (const i of data) if (Array.isArray(i)) return true;
     return false;
   }
 
@@ -85,10 +84,18 @@ function formatObject(uData, uOptions, uElement) {
   }
 
   function calculateWidths () {
+    // bug. bar width is not getting reset to default on each call
     let minWidth = baseChartWidth;
     const numOfBars = data.length;
-    // const scalePercentage = 1 / (1 + (numOfBars * 0.1));
-    // options.barWidth *= scalePercentage;
+    // Scale down width if too many bars
+    if (numOfBars > 10) {
+      const minClamp = 0.4;
+      const percentToScaleDown = (numOfBars-10) * 0.01;
+      const scalePercentage = Math.max(1 / (1 + percentToScaleDown), minClamp);
+      options.barWidth *= scalePercentage;
+      options.spacing *= ((scalePercentage * 0.5) + 0.5); // Scale margin slightly less
+      console.log(scalePercentage*100, "%, ", options.barWidth, "px, spacing: ", options.spacing);
+    }
     minWidth += numOfBars * (options.barWidth + options.spacing) * 1.1;
     options.chartWidth = minWidth;
     options.chartWidthMax = minWidth + baseChartWidth;

@@ -1,7 +1,7 @@
 /// Main jQuery Script
 
 // Init variables
-let readyToBuild = false;
+let readyToBuild;
 
 // Todo replace test data with user data
 // test data
@@ -18,13 +18,13 @@ let userElement = "";
 
 /// Begin DOM listening/interaction
 $(document).ready(function() {
-
+  readyToBuild = false;
 
 
   // Show confirm button
   $("#verify-button").click(function() {
     submitParameters();
-    if (!readyToBuild) alert("Please verify entry forms")
+    if (!readyToBuild) alert("Please verify entry forms");
   });
 
   // Build graph on button click
@@ -40,26 +40,32 @@ $(document).ready(function() {
 // Functions
 // Verifies there's no conflicting options
 function submitParameters() {
-  // Collect input data
-  const $inputData = $("#input-data");
-  const $inputOptions = testOptions;
-  const $inputElement = testElement;
-  const valueStrings = $inputData.val().replaceAll(" ","").split(",");
-
   // Clear global vars
   userData = [];
   userOptions = {};
   userElement = "";
 
+  // Collect input data
+  const $inputData = $("#input-data");
+
+  // Convert input to numbers
+  const valueStrings = $inputData.val().replaceAll(/[^0-9,]/g,"").split(",").filter(a => a !== "");
+  console.log("data: ", valueStrings);
+  if (!valueStrings.length) return false
+  userData = valueStrings.map(Number);
+
+
+
+
+
+  // Todo add some checks before build button is ready
   // Save new data to global vars
-  valueStrings.forEach(a => userData.push(parseFloat(a)));
+  console.log(userData);
+  const $inputOptions = testOptions;
+  const $inputElement = testElement;
   userOptions = $inputOptions;
   userElement = $inputElement;
-
-  console.log(userData);
-  // Todo add some checks before build button is ready
   readyToBuild = true;
-  if (!readyToBuild) return;
   $("#button-build").prop("disabled", false).addClass("special-button").text("Build Chart");
 }
 
@@ -232,6 +238,7 @@ function generateBarChart(data, options, element) {
 
       // returns heigh as percentage based on min and max values
     function getBarHeight(barValue) {
+      if (options.max === options.min) return "100%"
       let height = barValue - options.min;
       height = height / (options.max - options.min);
       height *= 100; // convert to percentage
