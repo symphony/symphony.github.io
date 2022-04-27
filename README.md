@@ -19,4 +19,4 @@ Data, Options, Element ID
 5. A preview will display on the page.
 6. A code block may be copied for you to use in your own project.
 
-Note: This product is unfinished and a _very_ rough early prototype. 
+Note: I am a new web development student. this product is unfinished and created for educational purposes only
